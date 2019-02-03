@@ -1,4 +1,4 @@
-# FRC-2019-Command-2-2
+# FRC-2019-Rampage
 Command based code for our 2019 robot, Rampage. 
 
 ## [Drive](/src/main/java/frc/robot/Drive)
@@ -10,13 +10,6 @@ moving with the DriveToHatch system
 * ### Drive (Command)
 Utilizing drivetrain (DriveSubsystem), this drives the robot around based on the two joystick inputs from a Logitech Xbox Controller on X
 mode.
-
-## [Bridge](/src/main/java/frc/robot/Bridge)
-
-* ### BridgeSubsystem
-Has multiple empty methods for opening the bridge mechanism. Since the build team has not decided on the mechanism, this portion will
-remain incomplete until we are certain what moves what. This uncertainty is why there is no more subsystems or commands for this portion
-of the robot
 
 ## [DriveToHatch](/src/main/java/frc/robot/DriveToHatch)
 
