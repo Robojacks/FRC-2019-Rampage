@@ -10,8 +10,8 @@ package frc.robot.Neck;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class NeckOpen extends Command {
-  public NeckOpen() {
+public class NeckOut extends Command {
+  public NeckOut() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.neck);
   }
