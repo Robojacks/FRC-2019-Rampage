@@ -23,34 +23,35 @@ import frc.robot.Tail.*;
  */
 public class OI {
   
-	public static XboxController xbox = new XboxController(3);
+	private static final XboxController xbox = new XboxController(RobotMap.XBOX_CONTROLLER_PORT);
 	
-	public static Button X = new JoystickButton(xbox, 1);
+	public static Button X = new JoystickButton(xbox, RobotMap.X_BUTTON);
 	
-	public static Button Y = new JoystickButton(xbox, 2);
+	public static Button Y = new JoystickButton(xbox, RobotMap.Y_BUTTON);
 	
-	public static Button A = new JoystickButton(xbox, 3);
+	public static Button A = new JoystickButton(xbox, RobotMap.A_BUTTON);
 	
-	public static Button B = new JoystickButton(xbox, 4);
+	public static Button B = new JoystickButton(xbox, RobotMap.B_BUTTON);
 	
-	public static Button LB = new JoystickButton(xbox, 5);
+	public static Button LB = new JoystickButton(xbox, RobotMap.LEFT_BUMPER);
 	
-	public static Button RB = new JoystickButton(xbox, 6);
+	public static Button RB = new JoystickButton(xbox, RobotMap.RIGHT_BUMPER);
 	
-	public static Button LT = new JoystickButton(xbox, 7);
+	public static Button LT = new JoystickButton(xbox, RobotMap.LEFT_TRIGGER);
 	
-	public static Button RT = new JoystickButton(xbox, 8);
+	public static Button RT = new JoystickButton(xbox, RobotMap.RIGHT_TRIGGER);
 	
-	public static Button back = new JoystickButton(xbox, 9);
+	public static Button back = new JoystickButton(xbox, RobotMap.BACK_BUTTON);
 	
-	public static Button start = new JoystickButton(xbox, 10);
+	public static Button start = new JoystickButton(xbox, RobotMap.START_BUTTON);
 	
-	public static Button LJoy = new JoystickButton(xbox, 11);
+	public static Button LJoy = new JoystickButton(xbox, RobotMap.LEFT_JOYSTICK_TRIGGER);
 	
-	public static Button RJoy = new JoystickButton(xbox, 12);
+	public static Button RJoy = new JoystickButton(xbox, RobotMap.RIGHT_JOYSTICK_TRIGGER);
 
 	public OI() {
-		// Shuffleboard testing
+
+		// Shuffleboard/SmartDashboard testing
 
 		SmartDashboard.putData("Open Neck", new NeckOpen());
 
@@ -91,6 +92,5 @@ public class OI {
 		//} else {
 		LB.whenPressed(new TailClose());
 		//}
-
 	}
 }
