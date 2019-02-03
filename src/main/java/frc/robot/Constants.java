@@ -36,6 +36,8 @@ public class Constants {
 
     // State variables
 
+    public static boolean beakOut = false;
+
     public static boolean tailOut = false;
 
     public static boolean neckOut = false; 
@@ -51,7 +53,7 @@ public class Constants {
     // from top of camera
     public static final double cameraHeightFt = 0.0 + 0/12; // 0 feet, 0 inches
 
-    public static final double cameraMountingAngle = 0.0 + 0/12; // 0 feet, 0 inches
+    public static final double cameraMountingAngle = 0.0; // 0.0 degrees
 
 }
 
