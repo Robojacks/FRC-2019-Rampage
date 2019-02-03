@@ -8,9 +8,9 @@
 package frc.robot.Tail;
 
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.Constants;
 import frc.robot.RobotMap;
 
 /**
@@ -20,20 +20,22 @@ public class TailSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   Compressor BigChungus = RobotMap.BigChungus; 
-  Solenoid TailMover = RobotMap.TailMover; 
+  DoubleSolenoid TailMover = RobotMap.TailMover; 
 
   public TailSubsystem(){
     BigChungus.start();
   }
 
-  public void open() {
-    TailMover.set(true);
-    Constants.tailOut = true;
+  public void forward() {
+    TailMover.set(Value.kForward);
   }
 
-  public void close() {
-    TailMover.set(false);
-    Constants.tailOut = false;
+  public void backward() {
+    TailMover.set(Value.kReverse);
+  }
+
+  public void off() {
+    TailMover.set(Value.kOff);
   }
 
   @Override
