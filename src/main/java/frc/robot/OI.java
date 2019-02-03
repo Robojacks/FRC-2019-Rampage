@@ -45,6 +45,6 @@ public class OI {
 	public static Button RJoy = new JoystickButton(xbox, 12);
 
 	public OI() {
-		X.whenPressed(new GoToHatchPanel());
+		
 	}
 }
