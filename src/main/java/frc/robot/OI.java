@@ -57,9 +57,9 @@ public class OI {
 
 		SmartDashboard.putData("Close Neck", new NeckIn());
 
-		SmartDashboard.putData("Open Tail", new TailOpen());
+		SmartDashboard.putData("Open Tail", new TailOut());
 
-		SmartDashboard.putData("Close Tail", new TailClose());
+		SmartDashboard.putData("Close Tail", new TailIn());
 
 		SmartDashboard.putData("Open Beak", new BeakOut());
 
@@ -81,10 +81,9 @@ public class OI {
 
 		A.whenPressed(new MoveBeak());
 
-		RB.whenPressed(new TailOpen());
+		RB.whenPressed(new TailOut());
 
-		LB.whenPressed(new TailClose());
+		LB.whenPressed(new TailIn());
 		
 	}
 }
-
