@@ -9,10 +9,10 @@ package frc.robot.Actions;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
-import frc.robot.Beak.BeakOpen;
+import frc.robot.Beak.BeakIn;
 import frc.robot.DriveToHatch.GoToHatchPanel;
 import frc.robot.DriveToHatch.RotateToHatchPanel;
-import frc.robot.Neck.NeckOpen;
+import frc.robot.Neck.NeckOut;
 
 /**
  * Drives up to target and places hatch panel on it
@@ -36,11 +36,11 @@ public class ConnectHatchPanel extends CommandGroup {
     
     addSequential(new RotateToHatchPanel());
 
-    addParallel(new GoToHatchPanel());
+    addSequential(new GoToHatchPanel());
 
-    addParallel(new NeckOpen());
+    addParallel(new NeckOut());
 
-    addSequential(new BeakOpen());
+    addParallel(new BeakIn());
 
   }
 }
