@@ -10,8 +10,8 @@ package frc.robot.Tail;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class TailClose extends Command {
-  public TailClose() {
+public class TailIn extends Command {
+  public TailIn() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.tail);
   }
