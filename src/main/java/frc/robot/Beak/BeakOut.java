@@ -10,8 +10,8 @@ package frc.robot.Beak;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class BeakOpen extends Command {
-  public BeakOpen() {
+public class BeakOut extends Command {
+  public BeakOut() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.beak);
   }
@@ -19,7 +19,7 @@ public class BeakOpen extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.beak.open();
+    Robot.beak.out();
   }
 
   // Called repeatedly when this Command is scheduled to run
