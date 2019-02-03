@@ -53,17 +53,17 @@ public class OI {
 
 		// Shuffleboard/SmartDashboard testing
 
-		SmartDashboard.putData("Open Neck", new NeckOpen());
+		SmartDashboard.putData("Open Neck", new NeckOut());
 
-		SmartDashboard.putData("Close Neck", new NeckClose());
+		SmartDashboard.putData("Close Neck", new NeckIn());
 
 		SmartDashboard.putData("Open Tail", new TailOpen());
 
 		SmartDashboard.putData("Close Tail", new TailClose());
 
-		SmartDashboard.putData("Open Beak", new BeakOpen());
+		SmartDashboard.putData("Open Beak", new BeakOut());
 
-		SmartDashboard.putData("Close Beak", new BeakClose());
+		SmartDashboard.putData("Close Beak", new BeakIn());
 
 		SmartDashboard.putData("Go to Hatch Panel", new GoToHatchPanel());
 
@@ -75,22 +75,16 @@ public class OI {
 
 		back.whenPressed(new RetrieveHatchPanel()); 
 		
-		//if (Constants.neckOut){
-		LT.whenPressed(new NeckOpen());
-		
-		//} else {
-		RT.whenPressed(new NeckClose());
-		//}
+		X.whenPressed(new DeployRamp());
 
-		Y.whenPressed(new BeakOpen());
+		Y.whenPressed(new MoveTail());
 
-		A.whenPressed(new BeakClose());
+		A.whenPressed(new MoveBeak());
 
-		//if (Constants.tailOut) {
 		RB.whenPressed(new TailOpen());
 
-		//} else {
 		LB.whenPressed(new TailClose());
-		//}
+		
 	}
 }
+
