@@ -11,6 +11,15 @@ moving with the DriveToHatch system
 Utilizing drivetrain (DriveSubsystem), this drives the robot around based on the two joystick inputs from a Logitech Xbox Controller on X
 mode.
 
+## [Beak](/src/main/java/frc/robot/Beak)
+Opens and closes the hatch holding mechanism
+
+## [Neck](/src/main/java/frc/robot/Neck)
+Extends and retracts the beak
+
+## [Tail](/src/main/java/frc/robot/Tail)
+Helps open up, hold up, or fold down ramp extension
+
 ## [DriveToHatch](/src/main/java/frc/robot/DriveToHatch)
 
 * ### LimelightSubsystem
@@ -38,6 +47,9 @@ This is a work in progress commandGroup that will place a hatch on a panel on ei
 
 * ### RetrieveHatchPanel
 This is a work in progress commandGroup that will take a hatch from the loading station 
+
+* ### DeployRamp
+Opens up the tail ramp extension
 
 ## [Other Files](/src/main/java/frc/robot)
 
