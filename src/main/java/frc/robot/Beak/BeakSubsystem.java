@@ -19,11 +19,11 @@ public class BeakSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  Compressor BigChungus = RobotMap.BigChungus;
-  Solenoid BeakPusher = RobotMap.BeakPusher; 
+  Compressor Airow = new Compressor(RobotMap.COMPRESSOR_MODULE);
+  Solenoid BeakPusher = new Solenoid(RobotMap.COMPRESSOR_MODULE, RobotMap.BEAK_SOLENOID_CHANNEL); 
 
   public BeakSubsystem(){
-    BigChungus.start(); 
+    Airow.start(); 
   }
 
   public void open(){
