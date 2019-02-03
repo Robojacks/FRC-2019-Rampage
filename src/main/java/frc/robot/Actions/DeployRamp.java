@@ -19,10 +19,11 @@ public class DeployRamp extends CommandGroup {
   public DeployRamp() {
     requires(Robot.tail);
 
-    addSequential(new TailOpen());
+    addSequential(new TailOut());
 
     Timer.delay(2.0);
 
-    addSequential(new TailClose());
+    addSequential(new TailIn());
   }
 }
+
