@@ -20,12 +20,12 @@ public class NeckSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  Compressor BigChungus = RobotMap.BigChungus;
+  Compressor Airow = new Compressor(RobotMap.COMPRESSOR_MODULE);
 
-  Solenoid NeckPusher = RobotMap.NeckPusher;
+  Solenoid NeckPusher = new Solenoid(RobotMap.COMPRESSOR_MODULE, RobotMap.NECK_SOLENOID_CHANNEL);
 
   public NeckSubsystem() {
-    BigChungus.start();
+    Airow.start();
    
   }
 
