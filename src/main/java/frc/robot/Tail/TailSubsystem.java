@@ -19,11 +19,11 @@ import frc.robot.RobotMap;
 public class TailSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  Compressor BigChungus = RobotMap.BigChungus; 
-  DoubleSolenoid TailMover = RobotMap.TailMover; 
+  Compressor Airow = new Compressor(RobotMap.COMPRESSOR_MODULE); 
+  DoubleSolenoid TailMover = new DoubleSolenoid(RobotMap.TAIL_SOLENOID_FOWARD_CHANNEL, RobotMap.TAIL_SOLENOID_REVERSE_CHANNEL); 
 
   public TailSubsystem(){
-    BigChungus.start();
+    Airow.start();
   }
 
   public void forward() {
@@ -44,3 +44,4 @@ public class TailSubsystem extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 }
+
