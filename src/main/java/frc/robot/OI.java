@@ -10,7 +10,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Actions.*;
+import frc.robot.Beak.*;
 import frc.robot.DriveToHatch.*;
+import frc.robot.Neck.*;
+import frc.robot.Tail.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -45,6 +50,47 @@ public class OI {
 	public static Button RJoy = new JoystickButton(xbox, 12);
 
 	public OI() {
+		// Shuffleboard testing
+
+		SmartDashboard.putData("Open Neck", new NeckOpen());
+
+		SmartDashboard.putData("Close Neck", new NeckClose());
+
+		SmartDashboard.putData("Open Tail", new TailOpen());
+
+		SmartDashboard.putData("Close Tail", new TailClose());
+
+		SmartDashboard.putData("Open Beak", new BeakOpen());
+
+		SmartDashboard.putData("Close Beak", new BeakClose());
+
+		SmartDashboard.putData("Go to Hatch Panel", new GoToHatchPanel());
+
+		SmartDashboard.putData("Rotate to Hatch Panel", new RotateToHatchPanel());
+
+		// Commands attached
+
+		start.whenPressed(new GoToHatchPanel());
+
+		back.whenPressed(new RetrieveHatchPanel()); 
 		
+		//if (Constants.neckOut){
+		LT.whenPressed(new NeckOpen());
+		
+		//} else {
+		RT.whenPressed(new NeckClose());
+		//}
+
+		Y.whenPressed(new BeakOpen());
+
+		A.whenPressed(new BeakClose());
+
+		//if (Constants.tailOut) {
+		RB.whenPressed(new TailOpen());
+
+		//} else {
+		LB.whenPressed(new TailClose());
+		//}
+
 	}
 }
