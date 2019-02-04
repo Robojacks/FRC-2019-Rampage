@@ -35,6 +35,15 @@ public class BeakSubsystem extends Subsystem {
   public void in(){
     Constants.beakOut = false;
     BeakPusher.set(false);
+    
+  public void changeState() {
+    if (Constants.beakOut) {
+      this.in();
+
+    } else {
+      this.out();
+    }
+  }
 
   }
   @Override
