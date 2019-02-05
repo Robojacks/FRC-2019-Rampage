@@ -8,7 +8,6 @@
 package frc.robot.Tail;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Constants;
 import frc.robot.Robot;
 
 public class MoveTail extends Command {
@@ -20,12 +19,7 @@ public class MoveTail extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    if (Constants.tailOut) {
-      Robot.tail.backward();
-      
-    } else {
-      Robot.tail.forward();
-    }
+    Robot.tail.switchState();
   }
 
   // Called repeatedly when this Command is scheduled to run
