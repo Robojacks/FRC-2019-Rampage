@@ -60,7 +60,7 @@ public class RobotMap {
   public static final int LEFT_FRONT_WHEEL_PORT = 2;
 
   // Phenumatics
-  public static final int COMPRESSOR_MODULE = 0;
+  public static final int COMPRESSOR_MODULE = 20;
 
   public static final int NECK_SOLENOID_CHANNEL = 0;
 
