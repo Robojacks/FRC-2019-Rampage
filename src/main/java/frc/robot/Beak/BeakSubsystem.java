@@ -35,8 +35,9 @@ public class BeakSubsystem extends Subsystem {
   public void in(){
     Constants.beakOut = false;
     BeakPusher.set(false);
-    
-  public void changeState() {
+  }
+
+  public void switchState() {
     if (Constants.beakOut) {
       this.in();
 
@@ -44,8 +45,7 @@ public class BeakSubsystem extends Subsystem {
       this.out();
     }
   }
-
-  }
+  
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
