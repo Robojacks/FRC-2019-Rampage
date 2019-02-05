@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 //import edu.wpi.first.wpilibj.command.Command;
@@ -37,6 +39,8 @@ public class Robot extends TimedRobot {
   public static TailSubsystem tail = new TailSubsystem();
   public static OI m_oi;
 
+  
+
   //Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -48,6 +52,9 @@ public class Robot extends TimedRobot {
   public void robotInit() {
 
     m_oi = new OI();
+
+    UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture("Camera", 0);
+    UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture("Limelight", 1);
 
     // Makes sure the PID subsystems are not active
     hatchTracker.disable();
