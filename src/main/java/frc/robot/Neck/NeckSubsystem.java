@@ -39,6 +39,15 @@ public class NeckSubsystem extends Subsystem {
     Constants.neckOut = false; 
   }
 
+  public void switchState() {
+    if (Constants.neckOut) {
+      this.in();
+
+    } else {
+      this.out();
+    }
+  }
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
