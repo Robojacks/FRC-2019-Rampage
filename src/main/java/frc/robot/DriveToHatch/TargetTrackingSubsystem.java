@@ -35,7 +35,7 @@ public class TargetTrackingSubsystem extends PIDSubsystem {
 
     setOutputRange(0, 1);
 
-    setAbsoluteTolerance(0.1);
+    setAbsoluteTolerance(0.2);
 
     enable(); // Enables the PID controller.
   }
