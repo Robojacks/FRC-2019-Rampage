@@ -29,7 +29,7 @@ public class TargetTrackingSubsystem extends PIDSubsystem {
     super("Hatch Tracker", 1, 2, 3);
 
     // Use these to get going:
-    setSetpoint(0.5); // Sets where the PID controller should move the system
+    setSetpoint(0.5); // half a foot from target
 
     setInputRange(0, 1);
 
