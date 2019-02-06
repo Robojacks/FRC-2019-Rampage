@@ -14,6 +14,7 @@ import frc.robot.Constants;
  * used with the TargetTrackingSubsystem to move the robot towards the goal with the distance estimate.
  * More information here: {@linkplain http://docs.limelightvision.io/en/latest/cs_estimating_distance.html}
  * 
+ * @see Constants
  * @see TargetTrackingSubsystem
  */
 public class CalculateTargetDistance {
