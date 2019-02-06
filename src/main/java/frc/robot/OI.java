@@ -75,7 +75,7 @@ public class OI {
 
 		A.whenPressed(new MoveBeak());
 		
-		B.whenPressed(new MoveNeck());
+		B.whenPressed(new NeckOut());
 		
 	}
 }
