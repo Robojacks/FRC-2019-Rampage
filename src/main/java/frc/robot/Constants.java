@@ -51,7 +51,7 @@ public class Constants {
     // Camera height and angle
 
     // from top of camera
-    public static final double cameraHeightFt = 0.0 + 0/12; // 0 feet, 0 inches
+    public static final double cameraHeightFt = 0.0 + 5/12; // 0 feet, 5 inches
 
     public static final double cameraMountingAngle = 0.0; // 0.0 degrees
 
