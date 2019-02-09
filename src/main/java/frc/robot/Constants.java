@@ -7,7 +7,6 @@
 
 package frc.robot;
 
-import frc.robot.DriveToHatch.*;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -20,11 +19,11 @@ import edu.wpi.first.networktables.NetworkTableInstance;
  * @see CalculateTargetDistance
  */
 public class Constants {
-    
-    // - Network Tables for Vision -
+
+    // Network Tables for Vision
 
     public static final NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-    
+        
     public static final NetworkTableEntry tx = table.getEntry("tx");
     public static final NetworkTableEntry ty = table.getEntry("ty");
     public static final NetworkTableEntry ta = table.getEntry("ta");
@@ -33,16 +32,6 @@ public class Constants {
     public static final NetworkTableEntry ledMode = table.getEntry("ledMode");
     public static final NetworkTableEntry camMode = table.getEntry("camMode");
     public static final NetworkTableEntry pipeline = table.getEntry("pipeline");
-
-    // State variables
-
-    public static boolean beakOut = false;
-
-    public static boolean tailOut = false;
-
-    public static boolean neckOut = false; 
-
-    // Constant variables 
 
     // Vision Tape Height
 
@@ -59,13 +48,13 @@ public class Constants {
 
     public static final double HATCH_CONNECTION_DISTANCE = 0.5; // Half a foot
 
-    public static final double ROCKET_SHOOTING_DISTANCE = 2.0; // 2 feet
+	public static final double ROCKET_SHOOTING_DISTANCE = 2.0; // 2 feet
 
     // Error tolerance
 
-    public static final double rotationalErrorTolerance = 0.5; // 0.5 degree error tolerance 
+	public static final double rotationalErrorTolerance = 0.5; // 0.5 degree error tolerance 
 
-    public static final double fowardErrorTolerance = 0.2; // 0.2 foot error tolerance
+	public static final double fowardErrorTolerance = 0.2; // 0.2 foot error tolerance
 
 }
 
