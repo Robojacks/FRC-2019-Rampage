@@ -59,13 +59,13 @@ public class Constants {
 
     public static final double HATCH_CONNECTION_DISTANCE = 0.5; // Half a foot
 
-	public static final double ROCKET_SHOOTING_DISTANCE = 2.0; // 2 feet
+    public static final double ROCKET_SHOOTING_DISTANCE = 2.0; // 2 feet
 
     // Error tolerance
 
-	public static final double rotationalErrorTolerance = 0.5; // 0.5 degree error tolerance 
+    public static final double rotationalErrorTolerance = 0.5; // 0.5 degree error tolerance 
 
-	public static final double fowardErrorTolerance = 0.2; // 0.2 foot error tolerance
+    public static final double fowardErrorTolerance = 0.2; // 0.2 foot error tolerance
 
 }
 
