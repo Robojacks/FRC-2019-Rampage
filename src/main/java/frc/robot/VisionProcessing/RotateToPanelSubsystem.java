@@ -39,7 +39,7 @@ public class RotateToPanelSubsystem extends PIDSubsystem {
     
     setSetpoint(0); // Sets where the PID controller should move the system
 
-    setInputRange(-27, 27); // Lowest value is -27 degrees (to the left), highest value is 27 degrees (to the right)
+    setInputRange(-27f, 27f); // Lowest value is -27 degrees (to the left), highest value is 27 degrees (to the right)
 
     setOutputRange(-1, 1); // The outputs sent to the motors, which ranges from -1 to 1.
 
