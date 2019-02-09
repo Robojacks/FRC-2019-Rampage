@@ -18,7 +18,7 @@ import frc.robot.Beak.BeakSubsystem;
 //import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Drive.DriveSubsystem;
-import frc.robot.DriveToHatch.*;
+import frc.robot.VisionProcessing.*;
 import frc.robot.Neck.NeckSubsystem;
 import frc.robot.Tail.TailSubsystem;
 
@@ -32,7 +32,7 @@ import frc.robot.Tail.TailSubsystem;
 public class Robot extends TimedRobot {
   public static DriveSubsystem drivetrain = new DriveSubsystem();
   public static RotateToPanelSubsystem panelRotation = new RotateToPanelSubsystem();
-  public static TargetTrackingSubsystem hatchTracker = new TargetTrackingSubsystem();
+  public static TargetTrackingSubsystem visionTracker = new TargetTrackingSubsystem();
   public static LimelightSubsystem limelight = new LimelightSubsystem();
   public static NeckSubsystem neck = new NeckSubsystem();
   public static BeakSubsystem beak = new BeakSubsystem();
@@ -57,7 +57,7 @@ public class Robot extends TimedRobot {
     UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture("Limelight", 1);
 
     // Makes sure the PID subsystems are not active
-    hatchTracker.disable();
+    visionTracker.disable();
     panelRotation.disable();
 
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
