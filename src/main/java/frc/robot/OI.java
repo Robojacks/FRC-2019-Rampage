@@ -53,11 +53,11 @@ public class OI {
 
 		// Shuffleboard/SmartDashboard testing
 
-		SmartDashboard.putData("Move Neck", new NeckMove());
+		SmartDashboard.putData("Move Neck", new MoveNeck());
 
-		SmartDashboard.putData("Move Tail", new TailMove());
+		SmartDashboard.putData("Move Tail", new MoveTail());
 
-		SmartDashboard.putData("Move Beak", new BeakMove());
+		SmartDashboard.putData("Move Beak", new MoveBeak());
 
 		SmartDashboard.putData("Go to Hatch Panel", new GoToHatchPanel());
 
