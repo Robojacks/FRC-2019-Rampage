@@ -8,6 +8,7 @@
 package frc.robot.DriveToHatch;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import frc.robot.Constants;
 import frc.robot.Robot;
 
 /**
@@ -17,7 +18,7 @@ import frc.robot.Robot;
  * 
  * @see RotateToPanelSubsystem 
  * @see CalculateTargetDistance 
- * @see GoToHatchPanel
+ * @see GoToPanel
  */
 public class TargetTrackingSubsystem extends PIDSubsystem {
   
@@ -29,7 +30,7 @@ public class TargetTrackingSubsystem extends PIDSubsystem {
     super("Hatch Tracker", 1, 2, 3);
 
     // Use these to get going:
-    setSetpoint(0.5); // half a foot from target
+    setSetpoint(Constants.HATCH_CONNECTION_DISTANCE); // System starts with hatch connection by default
 
     setInputRange(0, 1);
 
@@ -38,6 +39,7 @@ public class TargetTrackingSubsystem extends PIDSubsystem {
     setAbsoluteTolerance(0.2);
 
     enable(); // Enables the PID controller.
+
   }
 
   @Override
@@ -55,6 +57,6 @@ public class TargetTrackingSubsystem extends PIDSubsystem {
   @Override
   protected void usePIDOutput(double output) {
     // Use both outputs in drive
-    Robot.drivetrain.driftDrive(output, Robot.panelRotation.PIDOut, !Robot.panelRotation.onTarget());
+    Robot.drivetrain.ArcadeDrive(output, Robot.panelRotation.PIDOut);
   }
 }
