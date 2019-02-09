@@ -47,6 +47,8 @@ public class TailSubsystem extends Subsystem {
     Timer.delay(2.0);
 
     TailMover.set(Value.kReverse);
+    
+    RobotState.notDeployed = false;
   }
 
   public void switchState() {
