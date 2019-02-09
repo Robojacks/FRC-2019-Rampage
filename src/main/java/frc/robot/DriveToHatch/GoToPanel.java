@@ -8,25 +8,28 @@
 package frc.robot.DriveToHatch;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Constants;
 import frc.robot.Robot;
 
 /**
  * Starts {@link RotateToPanelSubsystem} and {@link TargetTrackingSubsystem} PID loops and initializes
- * the limelight. Once finished, this disables the PID loops since they have finished their jobs.
+ * the limelight. Once finished, this will bring the robot right next to a hatch port.
  * 
  * @see RotateToPanelSubsystem 
  * @see TargetTrackingSubsystem
  * @see LimelightSubsystem
  */
-public class GoToHatchPanel extends Command {
-  public GoToHatchPanel() {
+public class GoToPanel extends Command {
+  public GoToPanel() {
     // Use requires() here to declare subsystem dependencies
     
     requires(Robot.drivetrain);
 
     requires(Robot.panelRotation);
 
-    requires(Robot.hatchTracker);
+    requires(Robot.limelight);
+
+    requires(Robot.visionTracker);
     
   }
 
@@ -41,22 +44,23 @@ public class GoToHatchPanel extends Command {
     Robot.limelight.lightAuto();
     Robot.limelight.init();
 
-    Robot.hatchTracker.enable();
+    Robot.visionTracker.enable();
     Robot.panelRotation.enable();
+
+    Robot.visionTracker.setSetpoint(Constants.HATCH_CONNECTION_DISTANCE);
     
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() { // in order for the command to finish,
     // it must either have both subsystems agreeing that it is on target, or find the target was lost 
-    return Robot.hatchTracker.onTarget() && Robot.panelRotation.onTarget() || Robot.limelight.noValidTarget();
+    return Robot.visionTracker.onTarget() && Robot.panelRotation.onTarget() || Robot.limelight.noValidTarget();
   }
 
   // Called once after isFinished returns true
@@ -64,7 +68,7 @@ public class GoToHatchPanel extends Command {
   protected void end() {
     // disabling pid subsystems - they have finished their jobs, no need to continue moving
     Robot.panelRotation.disable();
-    Robot.hatchTracker.disable();
+    Robot.visionTracker.disable();
 
     Robot.drivetrain.stop(); // stops any last motion from drivetrain to keep the target position
   }
