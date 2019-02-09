@@ -52,9 +52,9 @@ public class Constants {
 
     // Error tolerance
 
-    public static final double rotationalErrorTolerance = 0.5; // 0.5 degree error tolerance 
+    public static final double rotationalErrorTolerance = 0.5f; // 0.5 degree error tolerance 
 
-    public static final double fowardErrorTolerance = 0.2; // 0.2 foot error tolerance
+    public static final double fowardErrorTolerance = 0.2f; // 0.2 foot error tolerance
 
 }
 
