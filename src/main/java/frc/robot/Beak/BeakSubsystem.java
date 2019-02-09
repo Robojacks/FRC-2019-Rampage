@@ -10,7 +10,7 @@ package frc.robot.Beak;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.Constants;
+import frc.robot.RobotState;
 import frc.robot.RobotMap;
 
 /**
@@ -28,17 +28,17 @@ public class BeakSubsystem extends Subsystem {
   }
 
   public void out(){
-    Constants.beakOut = true;
+    RobotState.beakOut = true;
     BeakPusher.set(true);
   }
   
   public void in(){
-    Constants.beakOut = false;
+    RobotState.beakOut = false;
     BeakPusher.set(false);
   }
 
   public void switchState() {
-    if (Constants.beakOut) {
+    if (RobotState.beakOut) {
       this.in();
 
     } else {
