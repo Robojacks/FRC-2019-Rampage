@@ -17,13 +17,15 @@ import frc.robot.Robot;
  * @see RotateToPanelSubsystem
  * @see LimelightSubsystem
  */
-public class RotateToHatchPanel extends Command {
+public class RotateToPanel extends Command {
   
-  public RotateToHatchPanel() {
+  public RotateToPanel() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.drivetrain);
 
     requires(Robot.panelRotation);
+
+    requires(Robot.limelight);
   }
 
   // Called just before this Command runs the first time
@@ -37,6 +39,7 @@ public class RotateToHatchPanel extends Command {
 
     Robot.drivetrain.stop();
     Robot.panelRotation.enable();
+
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -62,3 +65,4 @@ public class RotateToHatchPanel extends Command {
   protected void interrupted() {
   }
 }
+
