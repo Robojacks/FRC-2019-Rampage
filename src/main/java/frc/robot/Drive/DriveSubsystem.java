@@ -7,8 +7,6 @@
 
 package frc.robot.Drive;
 
-import frc.robot.DriveToHatch.*;
-
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -53,6 +51,10 @@ public class DriveSubsystem extends Subsystem {
    */
   public void driftDrive(double speedForward, double rotation, boolean isRotating) {
     roboDrive.curvatureDrive(speedForward, rotation, isRotating);
+  }
+
+  public void ArcadeDrive(double speedForward, double rotation) {
+    roboDrive.arcadeDrive(speedForward, rotation);
   }
 
   /**
