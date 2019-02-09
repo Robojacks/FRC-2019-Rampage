@@ -32,7 +32,7 @@ public class TargetTrackingSubsystem extends PIDSubsystem {
     // Use these to get going:
     setSetpoint(Constants.HATCH_CONNECTION_DISTANCE); // System starts with hatch connection by default
 
-    setInputRange(0, 10);
+    setInputRange(0f, 10f);
 
     setOutputRange(-1, 1);
 
