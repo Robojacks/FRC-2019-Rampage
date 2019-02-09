@@ -11,15 +11,15 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
 import frc.robot.Beak.BeakIn;
 import frc.robot.Beak.BeakOut;
-import frc.robot.DriveToHatch.GoToHatchPanel;
-import frc.robot.DriveToHatch.RotateToHatchPanel;
+import frc.robot.VisionProcessing.GoToPanel;
+import frc.robot.VisionProcessing.RotateToPanel;
 import frc.robot.Neck.NeckOut;
 
 /**
- * Drives up to target and takes hatch panel from it
+ * Goes to a loading station and connects to the hatch panel for retrieval
  * 
- * @see RotateToHatchPanel
- * @see GoToHatchPanel
+ * @see RotateToPanel
+ * @see GoToPanel
  */
 public class RetrieveHatchPanel extends CommandGroup {
 
@@ -28,16 +28,16 @@ public class RetrieveHatchPanel extends CommandGroup {
     // Subsystem Requirements
     requires(Robot.drivetrain);
     requires(Robot.panelRotation);
-    requires(Robot.hatchTracker);
+    requires(Robot.visionTracker);
     requires(Robot.limelight);
     requires(Robot.neck);
     requires(Robot.beak);
 
     // Run commands
 
-    addSequential(new RotateToHatchPanel());
+    addSequential(new RotateToPanel());
 
-    addSequential(new GoToHatchPanel());
+    addSequential(new GoToPanel());
 
     addParallel(new NeckOut());
 
