@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.DriveToHatch;
+package frc.robot.VisionProcessing;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import frc.robot.Constants;
@@ -17,8 +17,8 @@ import edu.wpi.first.networktables.NetworkTableEntry;
  * {@link TargetTrackingSubsystem} to get to the hatch panel.
  * 
  * @see TargetTrackingSubsystem
- * @see RotateToHatchPanel
- * @see GoToHatchPanel
+ * @see RotateToPanel
+ * @see GoToPanel
  */
 public class RotateToPanelSubsystem extends PIDSubsystem {
   
@@ -43,8 +43,8 @@ public class RotateToPanelSubsystem extends PIDSubsystem {
 
     setOutputRange(-1, 1); // The outputs sent to the motors, which ranges from -1 to 1.
 
-    setAbsoluteTolerance(0.5); // 0.5 degrees is tolerable error for this system 
-
+    setAbsoluteTolerance(Constants.rotationalErrorTolerance); 
+    
     enable(); // - Enables the PID controller.
   }
 
