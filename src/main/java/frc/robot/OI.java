@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Actions.*;
 import frc.robot.Beak.*;
-import frc.robot.DriveToHatch.*;
+import frc.robot.VisionProcessing.*;
 import frc.robot.Neck.*;
 import frc.robot.Tail.*;
 
@@ -59,23 +59,29 @@ public class OI {
 
 		SmartDashboard.putData("Move Beak", new MoveBeak());
 
-		SmartDashboard.putData("Go to Hatch Panel", new GoToHatchPanel());
+		SmartDashboard.putData("Go to a Panel", new GoToPanel());
 
-		SmartDashboard.putData("Rotate to Hatch Panel", new RotateToHatchPanel());
+		SmartDashboard.putData("Go to Rocket Shooting Position", new GoToRocketShootingPosition());
+
+		SmartDashboard.putData("Rotate to Hatch Panel", new RotateToPanel());
 
 		// Commands attached
 
-		start.whenPressed(new GoToHatchPanel());
-
-		back.whenPressed(new RetrieveHatchPanel()); 
+		back.whenPressed(new MoveTail()); 
 		
-		X.whenPressed(new DeployRamp());
+		start.whenPressed(new ShootBallToRocketPort());
 
-		Y.whenPressed(new MoveTail());
+		LB.whenPressed(new MoveNeck());
 
-		A.whenPressed(new MoveBeak());
+		RB.whenPressed(new MoveBeak());
+
+		X.whenPressed(new ConnectHatchPanel());
 		
-		B.whenPressed(new NeckOut());
+		B.whenPressed(new RetrieveHatchPanel());
+
+		Y.whenPressed(new DeployBallToCargoShip());
+
+		A.whenPressed(new RetrieveBall());
 		
 	}
 }
