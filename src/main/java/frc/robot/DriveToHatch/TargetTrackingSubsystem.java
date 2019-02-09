@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.DriveToHatch;
+package frc.robot.VisionProcessing;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import frc.robot.Constants;
@@ -32,11 +32,11 @@ public class TargetTrackingSubsystem extends PIDSubsystem {
     // Use these to get going:
     setSetpoint(Constants.HATCH_CONNECTION_DISTANCE); // System starts with hatch connection by default
 
-    setInputRange(0, 1);
+    setInputRange(0, 10);
 
-    setOutputRange(0, 1);
+    setOutputRange(-1, 1);
 
-    setAbsoluteTolerance(0.2);
+    setAbsoluteTolerance(Constants.fowardErrorTolerance);
 
     enable(); // Enables the PID controller.
 
