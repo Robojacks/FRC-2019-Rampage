@@ -10,7 +10,7 @@ package frc.robot.Neck;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.Constants;
+import frc.robot.RobotState;
 import frc.robot.RobotMap;
 
 /**
@@ -31,16 +31,16 @@ public class NeckSubsystem extends Subsystem {
 
   public void out() {
     NeckPusher.set(true);
-    Constants.neckOut = true; 
+    RobotState.neckOut = true; 
   }
 
   public void in() {
     NeckPusher.set(false);
-    Constants.neckOut = false; 
+    RobotState.neckOut = false; 
   }
 
   public void switchState() {
-    if (Constants.neckOut) {
+    if (RobotState.neckOut) {
       this.in();
 
     } else {
