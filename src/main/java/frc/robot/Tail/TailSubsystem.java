@@ -10,9 +10,10 @@ package frc.robot.Tail;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.Constants;
+import frc.robot.RobotState;
 import frc.robot.RobotMap;
 
 /**
@@ -40,12 +41,21 @@ public class TailSubsystem extends Subsystem {
     TailMover.set(Value.kOff);
   }
 
+  public void deploy() {
+    TailMover.set(Value.kForward);
+
+    Timer.delay(2.0);
+
+    TailMover.set(Value.kReverse);
+  }
+
   public void switchState() {
-    if (Constants.tailOut) {
+    if (RobotState.tailOut) {
       this.backward();
-      
+
     } else {
       this.forward();
+
     }
   }
 
@@ -55,4 +65,3 @@ public class TailSubsystem extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 }
-
