@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.RobotController;
+import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -22,36 +24,40 @@ import frc.robot.Tail.*;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-  
+
 	private static final XboxController xbox = new XboxController(RobotMap.XBOX_CONTROLLER_PORT);
-	
+
 	public static Button X = new JoystickButton(xbox, RobotMap.X_BUTTON);
-	
+
 	public static Button Y = new JoystickButton(xbox, RobotMap.Y_BUTTON);
-	
+
 	public static Button A = new JoystickButton(xbox, RobotMap.A_BUTTON);
-	
+
 	public static Button B = new JoystickButton(xbox, RobotMap.B_BUTTON);
-	
+
 	public static Button LB = new JoystickButton(xbox, RobotMap.LEFT_BUMPER);
-	
+
 	public static Button RB = new JoystickButton(xbox, RobotMap.RIGHT_BUMPER);
-	
+
 	public static Button LT = new JoystickButton(xbox, RobotMap.LEFT_TRIGGER);
-	
+
 	public static Button RT = new JoystickButton(xbox, RobotMap.RIGHT_TRIGGER);
-	
+
 	public static Button back = new JoystickButton(xbox, RobotMap.BACK_BUTTON);
-	
+
 	public static Button start = new JoystickButton(xbox, RobotMap.START_BUTTON);
-	
+
 	public static Button LJoy = new JoystickButton(xbox, RobotMap.LEFT_JOYSTICK_TRIGGER);
-	
+
 	public static Button RJoy = new JoystickButton(xbox, RobotMap.RIGHT_JOYSTICK_TRIGGER);
 
 	public OI() {
 
 		// Shuffleboard/SmartDashboard testing
+
+		SmartDashboard.putData("CAN Status", (Sendable) RobotController.getCANStatus());
+
+		SmartDashboard.putNumber("Battery Voltage", RobotController.getBatteryVoltage());
 
 		SmartDashboard.putData("Move Neck", new MoveNeck());
 
