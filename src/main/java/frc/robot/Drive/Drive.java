@@ -18,7 +18,7 @@ import frc.robot.Robot;
  */
 public class Drive extends Command {
 
-  private final XboxController xbox = new XboxController(0);
+  private final XboxController xbox = new XboxController(RobotMap.XBOX_CONTROLLER_PORT);
 
   public Drive() {
     requires(Robot.drivetrain);
