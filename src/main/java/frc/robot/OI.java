@@ -55,10 +55,6 @@ public class OI {
 
 		// Shuffleboard/SmartDashboard testing
 
-		SmartDashboard.putData("CAN Status", (Sendable) RobotController.getCANStatus());
-
-		SmartDashboard.putNumber("Battery Voltage", RobotController.getBatteryVoltage());
-
 		SmartDashboard.putData("Move Neck", new MoveNeck());
 
 		SmartDashboard.putData("Move Tail", new MoveTail());
