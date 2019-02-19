@@ -32,8 +32,8 @@ public class RotateToPanel extends Command {
   @Override
   protected void initialize() {
     
-    Robot.limelight.lightAuto();
-    Robot.limelight.init();
+    Robot.limelight.lightOn();
+    Robot.limelight.visionMode();
 
     Robot.panelRotation.dependent = false;
 
@@ -63,6 +63,7 @@ public class RotateToPanel extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    this.end();
   }
 }
 
