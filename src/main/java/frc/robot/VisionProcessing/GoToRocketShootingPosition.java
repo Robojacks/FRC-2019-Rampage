@@ -39,13 +39,13 @@ public class GoToRocketShootingPosition extends Command {
 
     Robot.drivetrain.stop(); // makes sure nothing is moving before the correction begins
 
-    Robot.limelight.lightAuto();
-    Robot.limelight.init();
+    Robot.limelight.lightOn();
+    Robot.limelight.visionMode();
 
     Robot.visionTracker.enable();
     Robot.panelRotation.enable();
 
-    Robot.visionTracker.setSetpoint(Constants.ROCKET_SHOOTING_DISTANCE);
+    Robot.visionTracker.setSetpoint(Constants.ROCKET_SHOOTING_AREA);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -56,7 +56,7 @@ public class GoToRocketShootingPosition extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.visionTracker.onTarget() && Robot.panelRotation.onTarget() || Robot.limelight.noValidTarget();
+    return Robot.visionTracker.onTarget() && Robot.panelRotation.onTarget();
   }
 
   // Called once after isFinished returns true
@@ -73,5 +73,6 @@ public class GoToRocketShootingPosition extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    this.end();
   }
 }
