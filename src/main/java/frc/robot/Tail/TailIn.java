@@ -19,7 +19,7 @@ public class TailIn extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.tail.backward();
+    Robot.tail.in();
   }
 
   // Called repeatedly when this Command is scheduled to run
