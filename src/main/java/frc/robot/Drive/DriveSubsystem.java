@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 /**
@@ -33,13 +34,20 @@ public class DriveSubsystem extends Subsystem {
 
   private DifferentialDrive roboDrive = new DifferentialDrive(left, right);
 
+  public DriveSubsystem() {
+    Robot.initTalon(RFrontWheel);
+    Robot.initTalon(RRearWheel);
+    Robot.initTalon(LFrontWheel);
+    Robot.initTalon(LRearWheel);
+  }
+
   /**
    * Drives robot in TankDrive mode
    * 
    * @see Drive
    */
   public void TankDrive(double leftControl, double rightControl) {
-    roboDrive.tankDrive(leftControl, rightControl);
+    roboDrive.tankDrive(leftControl, rightControl, false);
   }
 
   /**
