@@ -28,8 +28,10 @@ public class BeakSubsystem extends Subsystem {
   }
 
   public void out(){
-    RobotState.beakOut = true;
-    BeakPusher.set(true);
+    if (RobotState.neckOut) {
+      RobotState.beakOut = true;
+      BeakPusher.set(true);
+    }
   }
   
   public void in(){
@@ -52,3 +54,4 @@ public class BeakSubsystem extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 }
+
