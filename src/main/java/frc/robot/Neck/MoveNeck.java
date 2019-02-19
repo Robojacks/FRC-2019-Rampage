@@ -7,19 +7,36 @@
 
 package frc.robot.Neck;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotState;
 
 public class MoveNeck extends Command {
   public MoveNeck() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.neck);
+    requires(Robot.beak);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.neck.switchState();
+
+    if (RobotState.SandstormDeploy) {
+      Robot.neck.out();
+      
+      Timer.delay(0.25);
+
+      Robot.beak.out();
+
+      RobotState.SandstormDeploy = false;
+
+    } else {
+      Robot.neck.switchState();
+
+    }
+    
   }
 
   // Called repeatedly when this Command is scheduled to run
