@@ -34,14 +34,14 @@ public class RotateToPanelSubsystem extends PIDSubsystem {
 
   public RotateToPanelSubsystem() {
     // Intert a subsystem name and PID values here
-    super("Rotate towards target", 1, 2, 3);
+    super("Rotate towards target", 0.1, 0, 0);
     // Use these to get going:
     
     setSetpoint(0); // Sets where the PID controller should move the system
 
     setInputRange(-27f, 27f); // Lowest value is -27 degrees (to the left), highest value is 27 degrees (to the right)
 
-    setOutputRange(-1, 1); // The outputs sent to the motors, which ranges from -1 to 1.
+    setOutputRange(-0.5, 0.5); // The outputs sent to the motors, which ranges from -1 to 1.
 
     setAbsoluteTolerance(Constants.rotationalErrorTolerance); 
     
