@@ -27,14 +27,14 @@ public class TargetTrackingSubsystem extends PIDSubsystem {
   public TargetTrackingSubsystem() {
 
     // Insert a subsystem name and PID values here
-    super("Hatch Tracker", 1, 2, 3);
+    super("Hatch Tracker", 0.1, 0, 0);
 
     // Use these to get going:
-    setSetpoint(Constants.HATCH_CONNECTION_DISTANCE); // System starts with hatch connection by default
+    setSetpoint(Constants.HATCH_CONNECTION_AREA); // System starts with hatch connection by default
 
-    setInputRange(0f, 10f);
+    setInputRange(0f, 100f);
 
-    setOutputRange(-1, 1);
+    setOutputRange(-0.5, 0.5);
 
     setAbsoluteTolerance(Constants.fowardErrorTolerance);
 
@@ -51,12 +51,12 @@ public class TargetTrackingSubsystem extends PIDSubsystem {
   @Override
   protected double returnPIDInput() {
     // Return your input value for the PID loop
-    return CalculateTargetDistance.getDistance();
+    return Constants.ta.getDouble(0.0);
   }
 
   @Override
   protected void usePIDOutput(double output) {
     // Use both outputs in drive
-    Robot.drivetrain.ArcadeDrive(output, Robot.panelRotation.PIDOut);
+    Robot.drivetrain.ArcadeDrive(-output, -Robot.panelRotation.PIDOut);
   }
 }
