@@ -41,26 +41,27 @@ public class GoToPanel extends Command {
 
     Robot.drivetrain.stop(); // makes sure nothing is moving before the correction begins
 
-    Robot.limelight.lightAuto();
-    Robot.limelight.init();
+    Robot.limelight.lightOn();
+    Robot.limelight.visionMode();
 
     Robot.visionTracker.enable();
     Robot.panelRotation.enable();
 
-    Robot.visionTracker.setSetpoint(Constants.HATCH_CONNECTION_DISTANCE);
+    Robot.visionTracker.setSetpoint(Constants.HATCH_CONNECTION_AREA);
     
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    //System.out.println("Area: " + Constants.ta.getDouble(0.0));
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() { // in order for the command to finish,
     // it must either have both subsystems agreeing that it is on target, or find the target was lost 
-    return Robot.visionTracker.onTarget() && Robot.panelRotation.onTarget() || Robot.limelight.noValidTarget();
+    return Robot.visionTracker.onTarget() && Robot.panelRotation.onTarget(); 
   }
 
   // Called once after isFinished returns true
@@ -77,5 +78,6 @@ public class GoToPanel extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    this.end();
   }
 }
