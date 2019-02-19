@@ -35,8 +35,13 @@ public class NeckSubsystem extends Subsystem {
   }
 
   public void in() {
-    NeckPusher.set(false);
-    RobotState.neckOut = false; 
+
+    if (RobotState.beakOut == false) {
+      NeckPusher.set(false);
+      RobotState.neckOut = false;
+
+    } 
+
   }
 
   public void switchState() {
