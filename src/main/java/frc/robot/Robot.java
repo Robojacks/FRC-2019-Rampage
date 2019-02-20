@@ -7,7 +7,9 @@
 
 package frc.robot;
 
-import edu.wpi.cscore.UsbCamera;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -18,6 +20,7 @@ import frc.robot.Beak.BeakSubsystem;
 //import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Drive.DriveSubsystem;
+import frc.robot.Drive.SensitivitySubsystem;
 import frc.robot.VisionProcessing.*;
 import frc.robot.Neck.NeckSubsystem;
 import frc.robot.Tail.TailSubsystem;
@@ -37,6 +40,7 @@ public class Robot extends TimedRobot {
   public static NeckSubsystem neck = new NeckSubsystem();
   public static BeakSubsystem beak = new BeakSubsystem();
   public static TailSubsystem tail = new TailSubsystem();
+  public static SensitivitySubsystem sensitivitySwitcher = new SensitivitySubsystem();
   public static OI m_oi;
 
   
@@ -52,9 +56,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
 
     m_oi = new OI();
-
-    UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture("Camera", 0);
-    UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture("Limelight", 1);
+    
+    CameraServer.getInstance().startAutomaticCapture("Normal Camera", 0);
 
     // Makes sure the PID subsystems are not active
     visionTracker.disable();
@@ -75,8 +78,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    
-    //System.out.println(CalculateTargetDistance.getCameraMountingAngle(10)); // find camera mounting angle
   }
 
   /**
@@ -153,5 +154,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+  }
+
+  public static void initTalon(WPI_TalonSRX motor) {
+    motor.setNeutralMode(NeutralMode.Brake);
+    motor.neutralOutput();
+    motor.configNominalOutputForward(0.0, 0);
+    motor.configNominalOutputReverse(0.0, 0);
+    motor.configClosedloopRamp(0.5, 0);
   }
 }
