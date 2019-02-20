@@ -50,17 +50,12 @@ public class DriveSubsystem extends Subsystem {
     roboDrive.tankDrive(leftControl, rightControl, false);
   }
 
+  
   /**
-   * Created primarily for {@link TargetTrackingSubsystem}, takes two outputs to for driving forward
-   * and rotation with curvatureDrive rather than arcadeDrive, with a boolean isRotating for quick 
-   * adjustments.
+   * Drives robot in ArcadeDrive mode
    * 
-   * @see TargetTrackingSubsystem
+   * @see Drive
    */
-  public void driftDrive(double speedForward, double rotation, boolean isRotating) {
-    roboDrive.curvatureDrive(speedForward, rotation, isRotating);
-  }
-
   public void ArcadeDrive(double speedForward, double rotation) {
     roboDrive.arcadeDrive(speedForward, rotation);
   }
