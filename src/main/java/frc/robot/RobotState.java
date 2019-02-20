@@ -17,7 +17,7 @@ public class RobotState {
 
     public static boolean SandstormDeploy = true;
 
-	public static boolean beakOut = false;
+    public static boolean beakOut = false;
 
     public static boolean tailOut = false;
 
