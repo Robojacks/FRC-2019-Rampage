@@ -40,21 +40,27 @@ public class Constants {
     // Camera height and angle
 
     // from top of camera
-    public static final double cameraHeightFt = 0.0 + 5/12; // 0 feet, 5 inches
+    public static final double cameraHeightFt = 1.0 + 3/12; // 0 feet, 5 inches
 
-    public static final double cameraMountingAngle = 0.0; // 0.0 degrees
+    public static final double cameraMountingAngle = 17.2; // 15.0 degrees
 
     // Distance setpoints
 
-    public static final double HATCH_CONNECTION_DISTANCE = 0.5; // Half a foot
+    public static final double HATCH_CONNECTION_AREA = 8.8; 
 	
-    public static final double ROCKET_SHOOTING_DISTANCE = 2.0; // 2 feet
+    public static final double ROCKET_SHOOTING_AREA = 7.5; 
 
     // Error tolerance
 
     public static final double rotationalErrorTolerance = 0.5f; // 0.5 degree error tolerance 
 
-    public static final double fowardErrorTolerance = 0.2f; // 0.2 foot error tolerance
+    public static final double fowardErrorTolerance = 1.0f; // 1 percent area error tolerance
+
+    // Sensitivity set
+
+    public static final double highGear = 0.5;
+
+    public static final double lowGear = 0.25;
 
 }
 
