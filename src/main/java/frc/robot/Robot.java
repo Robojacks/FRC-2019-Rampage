@@ -56,8 +56,6 @@ public class Robot extends TimedRobot {
   public void robotInit() {
 
     m_oi = new OI();
-    
-    CameraServer.getInstance().startAutomaticCapture("Normal Camera", 0);
 
     // Makes sure the PID subsystems are not active
     visionTracker.disable();
