@@ -38,36 +38,30 @@ public class RobotMap {
 
   public static final int RIGHT_BUMPER = 6;
 
-  public static final int LEFT_TRIGGER = 7;
+  public static final int BACK_BUTTON = 7;
 
-  public static final int RIGHT_TRIGGER = 8;
+  public static final int START_BUTTON = 8;
 
-  public static final int BACK_BUTTON = 9;
+  public static final int LEFT_JOYSTICK_TRIGGER = 9;
 
-  public static final int START_BUTTON = 10;
-
-  public static final int LEFT_JOYSTICK_TRIGGER = 11;
-
-  public static final int RIGHT_JOYSTICK_TRIGGER = 12;
+  public static final int RIGHT_JOYSTICK_TRIGGER = 10;
 
   // Drive
-  public static final int RIGHT_REAR_WHEEL_PORT = 1;
+  public static final int RIGHT_REAR_WHEEL_PORT = 1; 
 
-  public static final int RIGHT_FRONT_WHEEL_PORT = 0;
+  public static final int RIGHT_FRONT_WHEEL_PORT = 2; 
 
   public static final int LEFT_REAR_WHEEL_PORT = 3;
 
-  public static final int LEFT_FRONT_WHEEL_PORT = 2;
+  public static final int LEFT_FRONT_WHEEL_PORT = 4;
 
   // Phenumatics
-  public static final int COMPRESSOR_MODULE = 20;
+  public static final int COMPRESSOR_MODULE = 21;
 
   public static final int NECK_SOLENOID_CHANNEL = 0;
 
-  public static final int BEAK_SOLENOID_CHANNEL = 4;
+  public static final int BEAK_SOLENOID_CHANNEL = 2;
 
-  public static final int TAIL_SOLENOID_FOWARD_CHANNEL = 1;
-
-  public static final int TAIL_SOLENOID_REVERSE_CHANNEL = 2;
+  public static final int TAIL_SOLENOID_CHANNEL = 1;
 
 }
