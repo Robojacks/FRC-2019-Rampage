@@ -15,11 +15,14 @@ public class RobotState {
 
     // State Variables
 
-    public static boolean beakOut = false;
+    public static boolean SandstormDeploy = true;
+
+	public static boolean beakOut = false;
 
     public static boolean tailOut = false;
 
     public static boolean neckOut = false; 
 
-    public static boolean notDeployed = true;
+    public static boolean sensitive = false; 
+
 }
