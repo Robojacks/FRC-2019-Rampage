@@ -7,14 +7,12 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Actions.*;
 import frc.robot.Beak.*;
+import frc.robot.Drive.ChangeSensitivity;
 import frc.robot.VisionProcessing.*;
 import frc.robot.Neck.*;
 import frc.robot.Tail.*;
@@ -38,10 +36,6 @@ public class OI {
 	public static Button LB = new JoystickButton(xbox, RobotMap.LEFT_BUMPER);
 
 	public static Button RB = new JoystickButton(xbox, RobotMap.RIGHT_BUMPER);
-
-	public static Button LT = new JoystickButton(xbox, RobotMap.LEFT_TRIGGER);
-
-	public static Button RT = new JoystickButton(xbox, RobotMap.RIGHT_TRIGGER);
 
 	public static Button back = new JoystickButton(xbox, RobotMap.BACK_BUTTON);
 
@@ -69,21 +63,19 @@ public class OI {
 
 		// Commands attached
 
-		back.whenPressed(new MoveTail()); 
-		
-		start.whenPressed(new ShootBallToRocketPort());
+		X.whileHeld(new GoToPanel());
+
+		A.whenPressed(new ChangeSensitivity());
+
+		B.whileHeld(new GoToRocketShootingPosition());
+
+		start.whenPressed(new MoveTail()); 
 
 		LB.whenPressed(new MoveNeck());
 
 		RB.whenPressed(new MoveBeak());
 
-		X.whenPressed(new ConnectHatchPanel());
-		
-		B.whenPressed(new RetrieveHatchPanel());
-
-		Y.whenPressed(new DeployBallToCargoShip());
-
-		A.whenPressed(new RetrieveBall());
+		Y.whenPressed(new MoveBeak());
 		
 	}
 }
