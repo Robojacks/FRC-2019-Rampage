@@ -25,8 +25,13 @@ public class LimelightSubsystem extends Subsystem {
   /**
    * Sets limelight to vision processing mode and sets vision pipeline to 0
    */
-  public void init() {
+  public void visionMode() {
     camMode.setNumber(0); // sets camera to vision processing mode
+    pipeline.setNumber(0);
+  }
+
+  public void driverMode() {
+    camMode.setNumber(1); // sets camera to driving mode
     pipeline.setNumber(0);
   }
 
@@ -56,7 +61,7 @@ public class LimelightSubsystem extends Subsystem {
    */
   public boolean noValidTarget() {
     if (validTarget == 0) {
-      System.out.println("Vision Target was lost");
+      System.out.println("ERROR: Vision Target was lost");
       return true; 
 
     } else {
