@@ -67,8 +67,6 @@ public class OI {
 
 		A.whenPressed(new ChangeSensitivity());
 
-		B.whileHeld(new GoToRocketShootingPosition());
-
 		start.whenPressed(new MoveTail()); 
 
 		LB.whenPressed(new MoveNeck());
