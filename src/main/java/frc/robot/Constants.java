@@ -62,5 +62,17 @@ public class Constants {
 
     public static final double lowGear = 0.25;
 
+    // Drivetrain Characterization
+
+    public static final int MAX_VELOCITY = 0;
+
+    public static final double Left_VIntercept = 0;
+
+	public static final int Left_Kv = 0;
+
+	public static final double Right_VIntercept = 0;
+
+	public static final int Right_Kv = 0;
+
 }
 
