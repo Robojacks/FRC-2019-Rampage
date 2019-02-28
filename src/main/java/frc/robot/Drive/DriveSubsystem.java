@@ -7,11 +7,13 @@
 
 package frc.robot.Drive;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
@@ -48,6 +50,49 @@ public class DriveSubsystem extends Subsystem {
    */
   public void TankDrive(double leftControl, double rightControl) {
     roboDrive.tankDrive(leftControl, rightControl, false);
+  }
+
+  /**
+   * Creates a more precise drive control for use with VelocityDrive()
+   * 
+   * @see VelocityDrive
+   */
+  public void VelocityDrive(double leftControl, double rightControl) {
+
+    double leftVelocity = Constants.Left_Kv * Constants.MAX_VELOCITY * leftControl;
+
+    double rightVelocity = Constants.Right_Kv * Constants.MAX_VELOCITY * rightControl;
+
+    // Set follower motors
+    LRearWheel.follow(LFrontWheel);
+    RRearWheel.follow(LFrontWheel);
+
+    // Set left side
+
+    if (leftControl > 0) {
+      LFrontWheel.set(ControlMode.Current, Constants.Left_VIntercept + leftVelocity);
+
+    } else if (leftControl < 0) { // Switch sign of VIntercept
+      LFrontWheel.set(ControlMode.Current, -1.0 * Constants.Left_VIntercept + leftVelocity);
+
+    } else {
+      LFrontWheel.stopMotor();
+
+    }
+
+    // Set right side
+
+    if (rightControl > 0) {
+      RFrontWheel.set(ControlMode.Current, Constants.Right_VIntercept + rightVelocity);
+
+    } else if (rightControl < 0) { // Switch sign of VIntercept
+      RFrontWheel.set(ControlMode.Current, -1.0 * Constants.Right_VIntercept + rightVelocity);
+
+    } else {
+      RFrontWheel.stopMotor();
+
+    }
+
   }
 
   
