@@ -9,10 +9,8 @@ package frc.robot.Drive;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.RobotState;
 
 /**
  * The Drive system, utilizing xbox controllers and tank drive to control the robot.
@@ -38,12 +36,9 @@ public class Drive extends Command {
 
   @Override
   protected void execute() {
-    
-    if (RobotState.sensitive) {
-      Robot.drivetrain.TankDrive(Constants.lowGear*xbox.getRawAxis(5), Constants.lowGear*xbox.getRawAxis(1));
-    } else {
-      Robot.drivetrain.TankDrive(Constants.highGear*xbox.getRawAxis(5), Constants.highGear*xbox.getRawAxis(1));
-    }
+
+    Robot.drivetrain.setMode();
+    Robot.drivetrain.TankDrive(xbox.getRawAxis(5), xbox.getRawAxis(1));
     
   }
 
