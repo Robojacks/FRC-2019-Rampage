@@ -8,6 +8,7 @@
 package frc.robot.Drive;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -16,6 +17,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.RobotState;
 
 /**
  * Contains all methods for control of the the drivetrain.
@@ -49,7 +51,47 @@ public class DriveSubsystem extends Subsystem {
    * @see Drive
    */
   public void TankDrive(double leftControl, double rightControl) {
-    roboDrive.tankDrive(leftControl, rightControl, false);
+
+    if (RobotState.fullThrottle) {
+      roboDrive.tankDrive(leftControl, rightControl, false);
+
+    } else if (RobotState.sensitive) {
+      roboDrive.tankDrive(Constants.lowGear*leftControl, Constants.lowGear*rightControl, false);
+
+    } else {
+      roboDrive.tankDrive(Constants.highGear*leftControl, Constants.lowGear*rightControl, false);
+
+    }
+    
+  }
+
+  /**
+   * Switches between offensive and defensive mode when triggered
+   * 
+   * @see SwitchDrivingMode
+   */
+  public void setMode() {
+    if (RobotState.offensiveMode) { // Set motors to offensive mode
+
+      LFrontWheel.setNeutralMode(NeutralMode.Brake);
+      LRearWheel.setNeutralMode(NeutralMode.Brake);
+  
+      RFrontWheel.setNeutralMode(NeutralMode.Brake);
+      RRearWheel.setNeutralMode(NeutralMode.Brake);
+
+      RobotState.fullThrottle = false;
+
+    } else { // Set motors to defensive mode
+
+      LFrontWheel.setNeutralMode(NeutralMode.Coast);
+      LRearWheel.setNeutralMode(NeutralMode.Coast);
+
+      RFrontWheel.setNeutralMode(NeutralMode.Coast);
+      RRearWheel.setNeutralMode(NeutralMode.Coast);
+  
+      RobotState.fullThrottle = true;
+
+    }
   }
 
   /**
