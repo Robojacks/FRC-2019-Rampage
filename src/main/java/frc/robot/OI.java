@@ -56,6 +56,8 @@ public class OI {
 		SmartDashboard.putData("Move Beak", new MoveBeak());
 
 		SmartDashboard.putData("Go to a Panel", new GoToPanel());
+		
+		SmartDashboard.putData("Go to Rocket Shooting Position", new GoToRocketShootingPosition());
 
 		SmartDashboard.putData("Rotate to Hatch Panel", new RotateToPanel());
 
