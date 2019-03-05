@@ -59,7 +59,7 @@ public class DriveSubsystem extends Subsystem {
       roboDrive.tankDrive(Constants.lowGear*leftControl, Constants.lowGear*rightControl, false);
 
     } else {
-      roboDrive.tankDrive(Constants.highGear*leftControl, Constants.lowGear*rightControl, false);
+      roboDrive.tankDrive(Constants.highGear*leftControl, Constants.highGear*rightControl, false);
 
     }
     
