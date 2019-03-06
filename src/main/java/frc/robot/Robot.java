@@ -84,6 +84,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    limelight.driverMode();
+    limelight.lightOff();
   }
 
   @Override
