@@ -19,7 +19,7 @@ Utilizes the Sensitivity Subsystem to switch sensitivity indirectly, while the D
 * ### Driver Mode Subsystem
 Switches a value that can make the drivetrain go max speed (as fast as driver is willing to go) and switch motors to cruise (to reduce tipping), and back to normal again when necessary. This is primarily for defensive purposes, as qualification matches have shown that most alliances have one defensive bot.
 
-* Switch Driving Mode (Command)
+* ### Switch Driving Mode (Command)
 Utilizes Driver Mode Subsystem to switch between "offensive" and "defensive" mode. Drive Subsystem uses the values this changes to switch the mode.
 
 ## [Beak](/src/main/java/frc/robot/Beak)
