@@ -93,10 +93,13 @@ Utilizes drivetrain (DriveSubsystem), limelight (LimelightSubsystem), panelRotat
 Initiates program, something that is not touched
 
 * ### Robot
-Controls state of robot by controlling commands and subsystems through the scheduler and being the liason between subsystems and commands
+This is the main controller of all robot behavior through multiple phases - disabled, autonomous, and teleOp. In here is the Scheduler, a WPILib class which determines when commands are active and inactive - integrated mainly with the OI, which calls the majority of commands through buttons.
 
 * ### Constants
 Keeps track of limelight values and settings through NetworkTables and constant values, namely heights of various things in the field and the mounted camera angle, for use with the CalculateTargetDistance class.
+
+* ### Robot State
+Has multiple variables that track the robot's state - currently just what speed setting it is at or a specific solenoid position.
 
 * ### OI (Operator Interface)
 Initializes and maps the xbox controller and its various buttons, along with mapping buttons to specific commands
