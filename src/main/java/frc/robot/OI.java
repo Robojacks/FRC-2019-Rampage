@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Beak.*;
-import frc.robot.Drive.ChangeSensitivity;
+import frc.robot.Drive.*;
 import frc.robot.VisionProcessing.*;
 import frc.robot.Neck.*;
 import frc.robot.Tail.*;
@@ -66,6 +66,8 @@ public class OI {
 		X.whileHeld(new GoToPanel());
 
 		A.whenPressed(new ChangeSensitivity());
+
+		B.whenPressed(new SwitchDrivingMode());
 
 		start.whenPressed(new MoveTail()); 
 

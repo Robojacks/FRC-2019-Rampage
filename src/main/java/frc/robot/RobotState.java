@@ -25,4 +25,8 @@ public class RobotState {
 
     public static boolean sensitive = false; 
 
+    public static boolean offensiveMode = true;
+
+    public static boolean fullThrottle = false;
+
 }

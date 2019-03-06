@@ -19,6 +19,7 @@ import frc.robot.Beak.BeakSubsystem;
 //import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Drive.DriveSubsystem;
+import frc.robot.Drive.DriverModeSubsystem;
 import frc.robot.Drive.SensitivitySubsystem;
 import frc.robot.VisionProcessing.*;
 import frc.robot.Neck.NeckSubsystem;
@@ -40,9 +41,8 @@ public class Robot extends TimedRobot {
   public static BeakSubsystem beak = new BeakSubsystem();
   public static TailSubsystem tail = new TailSubsystem();
   public static SensitivitySubsystem sensitivitySwitcher = new SensitivitySubsystem();
+  public static DriverModeSubsystem driveModeChanger = new DriverModeSubsystem();
   public static OI m_oi;
-
-  
 
   //Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
