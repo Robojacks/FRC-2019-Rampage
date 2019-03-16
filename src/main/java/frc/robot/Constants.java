@@ -39,12 +39,15 @@ public class Constants {
 
     // Camera height and angle
 
-    // from top of camera
-    public static final double cameraHeightFt = 1.0 + 3/12; // 0 feet, 5 inches
+    public static final double cameraHeightInches = 15; // 15 inches
 
-    public static final double cameraMountingAngle = 17.2; // 15.0 degrees
+    public static final double cameraMountingAngle = 17.2; // 17.2 degrees
 
     // Distance setpoints
+
+    public static final double HATCH_CONNECTION_INCHES = 0.2;
+
+    // Area setpoints
 
     public static final double HATCH_CONNECTION_AREA = 8.8; 
 	

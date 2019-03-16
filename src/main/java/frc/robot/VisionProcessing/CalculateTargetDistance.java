@@ -19,46 +19,31 @@ import frc.robot.Constants;
  */
 public class CalculateTargetDistance {
 
-  private static double angleToTarget;
+  private static double mountingRadians = Math.toRadians(Constants.cameraMountingAngle); // a1, converted to radians
 
-  private static double cameraMountingAngle;
-
-  private static double mountingAngleInRadians;
-
-  private static double angleToTargetInRadians;
-
-  private static double tangentOfAngle;
-
-  private static double differenceOfHeights;
-
-  private static double distance;
+  // find result of h2 - h1
+  private static double differenceOfHeights = Constants.visionTapeHeightFt - Constants.cameraHeightInches;
   
   /** 
    * D = (h2 - h1) / tan(a1 + a2). This equation, along with known numbers, helps find the distance
    * from a target.
    */
   public static double getDistance() {
-    angleToTarget = Constants.ty.getDouble(0.0);
 
-    cameraMountingAngle = Constants.cameraMountingAngle;
-
-    mountingAngleInRadians = Math.toRadians(cameraMountingAngle); // a1, converted to radians
-
-    angleToTargetInRadians = Math.toRadians(angleToTarget); // a2, converted to radians
+    // a2, converted to radians
+    double radiansToTarget = Math.toRadians(Constants.ty.getDouble(0.0)); 
 
     // find result of a1 + a2
-    double angleInRadians = mountingAngleInRadians + angleToTargetInRadians;
+    double angleInRadians = mountingRadians + radiansToTarget;
 
     // find the tangent of a1 + a2
-    tangentOfAngle = Math.tan(angleInRadians); 
-
-    // find result of h2 - h1
-    differenceOfHeights = Constants.visionTapeHeightFt - Constants.cameraHeightFt;
+    double tangentOfAngle = Math.tan(angleInRadians); 
 
     // Divide the two results ((h2 - h1) / tan(a1 + a2)) for the distance to target
-    distance = differenceOfHeights/tangentOfAngle;
+    double distance = differenceOfHeights/tangentOfAngle;
 
-    return distance; // outputs the distance calculated
+    // outputs the distance calculated
+    return distance; 
   }
 
   /** 
@@ -66,31 +51,24 @@ public class CalculateTargetDistance {
    * mounted camera angle.
    */
   public static double getCameraMountingAngle(double measuredDistance) {
-    
-    distance = measuredDistance; // d
-
-    angleToTarget = Constants.ty.getDouble(0.0); // a2
 
     // convert a2 to radians
-    angleToTargetInRadians = Math.toRadians(angleToTarget);
-
-    // find result of (h2 - h1) for hatch vision tape
-    differenceOfHeights = Constants.visionTapeHeightFt - Constants.cameraHeightFt;
+    double radiansToTarget = Math.toRadians(Constants.ty.getDouble(0.0));
 
     // find result of (h2 - h1) / d
-    double heightOverDistance = differenceOfHeights/distance;
+    double heightOverDistance = differenceOfHeights/measuredDistance;
 
     // find result of tan(a2)
-    tangentOfAngle = Math.tan(angleToTargetInRadians);
+    double tangentOfAngle = Math.tan(radiansToTarget);
 
     // (h2-h1)/d - tan(a2) subtract two results for the tangent of the two sides
     double TangentOfSides = heightOverDistance - tangentOfAngle; // feel free to change my name!
 
-    // subtract two results for the camera mounting angle in radians
-    mountingAngleInRadians = Math.atan(TangentOfSides);
+    // invert tangent operation to get the camera mounting angle in radians
+    double newMountingRadians = Math.atan(TangentOfSides);
 
     // change result into degrees
-    cameraMountingAngle = Math.toDegrees(mountingAngleInRadians);
+    double cameraMountingAngle = Math.toDegrees(newMountingRadians);
     
     return cameraMountingAngle; // output result
   }
