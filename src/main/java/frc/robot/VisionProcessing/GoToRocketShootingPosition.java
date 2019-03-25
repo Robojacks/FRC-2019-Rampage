@@ -23,7 +23,7 @@ public class GoToRocketShootingPosition extends Command {
   public GoToRocketShootingPosition() {
     // Use requires() here to declare subsystem dependencies
     
-    requires(Robot.drivetrain);
+    requires(Robot.drivetrain.getWpiSubsystem());
 
     requires(Robot.panelRotation);
 

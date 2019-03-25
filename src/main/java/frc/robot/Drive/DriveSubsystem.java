@@ -11,6 +11,15 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import org.ghrobotics.lib.localization.Localization;
+import org.ghrobotics.lib.localization.TankEncoderLocalization;
+import org.ghrobotics.lib.mathematics.twodim.control.RamseteTracker;
+import org.ghrobotics.lib.mathematics.twodim.control.TrajectoryTracker;
+import org.ghrobotics.lib.mathematics.units.Length;
+import org.ghrobotics.lib.subsystems.drive.TankDriveSubsystem;
+import org.ghrobotics.lib.wrappers.FalconMotor;
+import org.ghrobotics.lib.wrappers.ctre.FalconSRX;
+
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -23,26 +32,37 @@ import frc.robot.RobotState;
  * Contains all methods for control of the the drivetrain.
  * 
  * @see Drive
- * @see RotateToPanelSubsystem 
+ * @see RotateToPanelSubsystem
  * @see TargetTrackingSubsystem
  */
-public class DriveSubsystem extends Subsystem {
+public class DriveSubsystem extends TankDriveSubsystem {
+
+  FalconSRX<Length> LeftFrontWheel;
+  FalconSRX<Length> RightFrontWheel;
 
   private WPI_TalonSRX RRearWheel = new WPI_TalonSRX(RobotMap.RIGHT_REAR_WHEEL_PORT); // right rear wheel
   private WPI_TalonSRX RFrontWheel = new WPI_TalonSRX(RobotMap.RIGHT_FRONT_WHEEL_PORT); // right front wheel
   private WPI_TalonSRX LRearWheel = new WPI_TalonSRX(RobotMap.LEFT_REAR_WHEEL_PORT); // left rear wheel
   private WPI_TalonSRX LFrontWheel = new WPI_TalonSRX(RobotMap.LEFT_FRONT_WHEEL_PORT); // left front wheel
 
-  private SpeedControllerGroup right = new SpeedControllerGroup(RRearWheel, RFrontWheel); // right speed controller group 
-  private SpeedControllerGroup left = new SpeedControllerGroup(LRearWheel, LFrontWheel); // left speed controller group 
+  private SpeedControllerGroup right = new SpeedControllerGroup(RRearWheel, RFrontWheel); // right speed controller
+                                                                                          // group
+  private SpeedControllerGroup left = new SpeedControllerGroup(LRearWheel, LFrontWheel); // left speed controller group
 
   private DifferentialDrive roboDrive = new DifferentialDrive(left, right);
+
+  RamseteTracker tracker = new RamseteTracker(0.2, 1);
+
+  TankEncoderLocalization localization = new TankEncoderLocalization(null, null, null);
 
   public DriveSubsystem() {
     Robot.initTalon(RFrontWheel);
     Robot.initTalon(RRearWheel);
     Robot.initTalon(LFrontWheel);
     Robot.initTalon(LRearWheel);
+
+    LRearWheel.follow(LeftFrontWheel);
+    RRearWheel.follow(RightFrontWheel);
   }
 
   /**
@@ -56,13 +76,13 @@ public class DriveSubsystem extends Subsystem {
       roboDrive.tankDrive(leftControl, rightControl, false);
 
     } else if (RobotState.sensitive) {
-      roboDrive.tankDrive(Constants.lowGear*leftControl, Constants.lowGear*rightControl, false);
+      roboDrive.tankDrive(Constants.lowGear * leftControl, Constants.lowGear * rightControl, false);
 
     } else {
-      roboDrive.tankDrive(Constants.highGear*leftControl, Constants.highGear*rightControl, false);
+      roboDrive.tankDrive(Constants.highGear * leftControl, Constants.highGear * rightControl, false);
 
     }
-    
+
   }
 
   /**
@@ -75,7 +95,7 @@ public class DriveSubsystem extends Subsystem {
 
       LFrontWheel.setNeutralMode(NeutralMode.Brake);
       LRearWheel.setNeutralMode(NeutralMode.Brake);
-  
+
       RFrontWheel.setNeutralMode(NeutralMode.Brake);
       RRearWheel.setNeutralMode(NeutralMode.Brake);
 
@@ -88,56 +108,12 @@ public class DriveSubsystem extends Subsystem {
 
       RFrontWheel.setNeutralMode(NeutralMode.Coast);
       RRearWheel.setNeutralMode(NeutralMode.Coast);
-  
+
       RobotState.fullThrottle = true;
 
     }
   }
 
-  /**
-   * Creates a more precise drive control for use with VelocityDrive()
-   * 
-   * @see VelocityDrive
-   */
-  public void VelocityDrive(double leftControl, double rightControl) {
-
-    double leftVelocity = Constants.Left_Kv * Constants.MAX_VELOCITY * leftControl;
-
-    double rightVelocity = Constants.Right_Kv * Constants.MAX_VELOCITY * rightControl;
-
-    // Set follower motors
-    LRearWheel.follow(LFrontWheel);
-    RRearWheel.follow(LFrontWheel);
-
-    // Set left side
-
-    if (leftControl > 0) {
-      LFrontWheel.set(ControlMode.Current, Constants.Left_VIntercept + leftVelocity);
-
-    } else if (leftControl < 0) { // Switch sign of VIntercept
-      LFrontWheel.set(ControlMode.Current, -1.0 * Constants.Left_VIntercept + leftVelocity);
-
-    } else {
-      LFrontWheel.stopMotor();
-
-    }
-
-    // Set right side
-
-    if (rightControl > 0) {
-      RFrontWheel.set(ControlMode.Current, Constants.Right_VIntercept + rightVelocity);
-
-    } else if (rightControl < 0) { // Switch sign of VIntercept
-      RFrontWheel.set(ControlMode.Current, -1.0 * Constants.Right_VIntercept + rightVelocity);
-
-    } else {
-      RFrontWheel.stopMotor();
-
-    }
-
-  }
-
-  
   /**
    * Drives robot in ArcadeDrive mode
    * 
@@ -148,13 +124,14 @@ public class DriveSubsystem extends Subsystem {
   }
 
   /**
-   * Created primarily for {@link RotateToPanelSubsystem} when the robot is only rotating with 
-   * {@link RotateToHatchPanel}, takes an output to rotating a certain amount
+   * Created primarily for {@link RotateToPanelSubsystem} when the robot is only
+   * rotating with {@link RotateToHatchPanel}, takes an output to rotating a
+   * certain amount
    * 
    * @see RotateToPanelSubsystem
    * @see RotateToHatchPanel
    */
-  public void rotate(double output) { 
+  public void rotate(double output) {
     roboDrive.arcadeDrive(0, output); // positive is right, negative is left
   }
 
@@ -166,8 +143,27 @@ public class DriveSubsystem extends Subsystem {
   }
 
   @Override
-  public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    setDefaultCommand(new Drive());
+  public com.team254.lib.physics.DifferentialDrive getDifferentialDrive() {
+    return null;
+  }
+
+  @Override
+  public FalconMotor<Length> getLeftMotor() {
+    return LeftFrontWheel;
+  }
+
+  @Override
+  public FalconMotor<Length> getRightMotor() {
+    return RightFrontWheel;
+  }
+
+  @Override
+  public TrajectoryTracker getTrajectoryTracker() {
+    return tracker;
+  }
+
+  @Override
+  public Localization getLocalization() {
+    return localization;
   }
 }

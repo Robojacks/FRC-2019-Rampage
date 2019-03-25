@@ -21,7 +21,7 @@ public class RotateToPanel extends Command {
   
   public RotateToPanel() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.drivetrain);
+    requires(Robot.drivetrain.getWpiSubsystem());
 
     requires(Robot.panelRotation);
 

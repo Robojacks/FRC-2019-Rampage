@@ -23,7 +23,7 @@ public class GoToPanel extends Command {
   public GoToPanel() {
     // Use requires() here to declare subsystem dependencies
     
-    requires(Robot.drivetrain);
+    requires(Robot.drivetrain.getWpiSubsystem());
 
     requires(Robot.panelRotation);
 

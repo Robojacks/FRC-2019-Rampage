@@ -22,7 +22,7 @@ public class Drive extends Command {
   private final XboxController xbox = new XboxController(RobotMap.XBOX_CONTROLLER_PORT);
 
   public Drive() {
-    requires(Robot.drivetrain);
+    requires(Robot.drivetrain.getWpiSubsystem());
     requires(Robot.limelight);
   }
 
