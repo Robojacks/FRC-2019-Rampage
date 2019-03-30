@@ -77,5 +77,29 @@ public class Constants {
 
 	public static final int Right_Kv = 0;
 
+    // Path planner
+
+	public static final double LinearAccelMassKg = 0;
+
+	public static final double AngularAccelMomentKgM = 0;
+
+	public static final double wheelRadius = 0;
+
+	public static final double effectiveWheelBaseRadius = 0;
+
+	public static final double leftSpeedPerVolt = 0;
+
+	public static final double leftTorquePerVolt = 0;
+
+	public static final double leftFrictionVoltage = 0;
+
+	public static final double rightSpeedPerVolt = 0;
+
+	public static final double rightTorquePerVolt = 0;
+
+	public static final double rightFrictionVoltage = 0;
+
+	public static double angularDrag = 0;
+
 }
 
