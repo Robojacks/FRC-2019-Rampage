@@ -16,13 +16,18 @@ import org.ghrobotics.lib.localization.TankEncoderLocalization;
 import org.ghrobotics.lib.mathematics.twodim.control.RamseteTracker;
 import org.ghrobotics.lib.mathematics.twodim.control.TrajectoryTracker;
 import org.ghrobotics.lib.mathematics.units.Length;
+import org.ghrobotics.lib.mathematics.units.Rotation2d;
+import org.ghrobotics.lib.mathematics.units.SIUnit;
 import org.ghrobotics.lib.subsystems.drive.TankDriveSubsystem;
 import org.ghrobotics.lib.wrappers.FalconMotor;
 import org.ghrobotics.lib.wrappers.ctre.FalconSRX;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+
+import com.team254.lib.physics.DCMotorTransmission;
+import com.team254.lib.physics.DifferentialDrive;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -37,32 +42,40 @@ import frc.robot.RobotState;
  */
 public class DriveSubsystem extends TankDriveSubsystem {
 
-  FalconSRX<Length> LeftFrontWheel;
-  FalconSRX<Length> RightFrontWheel;
+  private FalconSRX<Length> LeftRepresentative;
+  private FalconSRX<Length> RightRepresentative;
 
   private WPI_TalonSRX RRearWheel = new WPI_TalonSRX(RobotMap.RIGHT_REAR_WHEEL_PORT); // right rear wheel
   private WPI_TalonSRX RFrontWheel = new WPI_TalonSRX(RobotMap.RIGHT_FRONT_WHEEL_PORT); // right front wheel
   private WPI_TalonSRX LRearWheel = new WPI_TalonSRX(RobotMap.LEFT_REAR_WHEEL_PORT); // left rear wheel
   private WPI_TalonSRX LFrontWheel = new WPI_TalonSRX(RobotMap.LEFT_FRONT_WHEEL_PORT); // left front wheel
 
-  private SpeedControllerGroup right = new SpeedControllerGroup(RRearWheel, RFrontWheel); // right speed controller
-                                                                                          // group
-  private SpeedControllerGroup left = new SpeedControllerGroup(LRearWheel, LFrontWheel); // left speed controller group
+  //private SpeedControllerGroup right = new SpeedControllerGroup(RRearWheel, RFrontWheel); // right speed controller group
+  //private SpeedControllerGroup left = new SpeedControllerGroup(LRearWheel, LFrontWheel); // left speed controller group
 
-  private DifferentialDrive roboDrive = new DifferentialDrive(left, right);
+  //private DifferentialDrive roboDrive = new DifferentialDrive(left, right);
 
-  RamseteTracker tracker = new RamseteTracker(0.2, 1);
+  Encoder leftEncoder = new Encoder(0, 1, false);
+  Encoder rightEncoder = new Encoder(2, 3, false);
 
-  TankEncoderLocalization localization = new TankEncoderLocalization(null, null, null);
+  double degreeHeading = 0;
+
+  private SIUnit<Rotation2d> robotHeading = new Rotation2d(degreeHeading);
+
+  private DCMotorTransmission leftTransmission = new DCMotorTransmission(Constants.leftSpeedPerVolt, Constants.leftTorquePerVolt, Constants.leftFrictionVoltage);
+  private DCMotorTransmission rightTransmission = new DCMotorTransmission(Constants.rightSpeedPerVolt, Constants.rightTorquePerVolt, Constants.rightFrictionVoltage);
+
+  private DifferentialDrive drive = new DifferentialDrive(Constants.LinearAccelMassKg, Constants.AngularAccelMomentKgM, Constants.angularDrag, Constants.wheelRadius, Constants.effectiveWheelBaseRadius, leftTransmission, rightTransmission);
+
+  private RamseteTracker tracker = new RamseteTracker(0.2, 1);
+
+  private TankEncoderLocalization localization = new TankEncoderLocalization(null, null, null);
 
   public DriveSubsystem() {
-    Robot.initTalon(RFrontWheel);
-    Robot.initTalon(RRearWheel);
-    Robot.initTalon(LFrontWheel);
-    Robot.initTalon(LRearWheel);
-
-    LRearWheel.follow(LeftFrontWheel);
-    RRearWheel.follow(RightFrontWheel);
+    LRearWheel.follow(LeftRepresentative);
+    LFrontWheel.follow(LeftRepresentative);
+    RRearWheel.follow(RightRepresentative);
+    RFrontWheel.follow(RightRepresentative);
   }
 
   /**
@@ -73,13 +86,13 @@ public class DriveSubsystem extends TankDriveSubsystem {
   public void TankDrive(double leftControl, double rightControl) {
 
     if (RobotState.fullThrottle) {
-      roboDrive.tankDrive(leftControl, rightControl, false);
+      tankDrive(leftControl, rightControl);
 
     } else if (RobotState.sensitive) {
-      roboDrive.tankDrive(Constants.lowGear * leftControl, Constants.lowGear * rightControl, false);
+      tankDrive(Constants.lowGear * leftControl, Constants.lowGear * rightControl);
 
     } else {
-      roboDrive.tankDrive(Constants.highGear * leftControl, Constants.highGear * rightControl, false);
+      tankDrive(Constants.highGear * leftControl, Constants.highGear * rightControl);
 
     }
 
@@ -115,46 +128,25 @@ public class DriveSubsystem extends TankDriveSubsystem {
   }
 
   /**
-   * Drives robot in ArcadeDrive mode
-   * 
-   * @see Drive
-   */
-  public void ArcadeDrive(double speedForward, double rotation) {
-    roboDrive.arcadeDrive(speedForward, rotation);
-  }
-
-  /**
-   * Created primarily for {@link RotateToPanelSubsystem} when the robot is only
-   * rotating with {@link RotateToHatchPanel}, takes an output to rotating a
-   * certain amount
-   * 
-   * @see RotateToPanelSubsystem
-   * @see RotateToHatchPanel
-   */
-  public void rotate(double output) {
-    roboDrive.arcadeDrive(0, output); // positive is right, negative is left
-  }
-
-  /**
    * Stops the drivetrain
    */
   public void stop() {
-    roboDrive.tankDrive(0, 0);
+    tankDrive(0, 0);
   }
 
   @Override
   public com.team254.lib.physics.DifferentialDrive getDifferentialDrive() {
-    return null;
+    return drive;
   }
 
   @Override
   public FalconMotor<Length> getLeftMotor() {
-    return LeftFrontWheel;
+    return LeftRepresentative;
   }
 
   @Override
   public FalconMotor<Length> getRightMotor() {
-    return RightFrontWheel;
+    return RightRepresentative;
   }
 
   @Override
