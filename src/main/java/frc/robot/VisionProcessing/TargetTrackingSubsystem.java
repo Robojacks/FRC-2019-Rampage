@@ -57,6 +57,6 @@ public class TargetTrackingSubsystem extends PIDSubsystem {
   @Override
   protected void usePIDOutput(double output) {
     // Use both outputs in drive
-    Robot.drivetrain.ArcadeDrive(-output, -Robot.panelRotation.PIDOut);
+    Robot.drivetrain.arcadeDrive(-output, -Robot.panelRotation.PIDOut);
   }
 }

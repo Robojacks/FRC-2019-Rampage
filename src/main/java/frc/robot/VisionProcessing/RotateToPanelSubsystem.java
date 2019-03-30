@@ -66,7 +66,7 @@ public class RotateToPanelSubsystem extends PIDSubsystem {
     if (dependent) {
       PIDOut = output; // Sends output to the FollowLineSubsystem, which keeps it on target
     } else {
-      Robot.drivetrain.rotate(output); // If all on its own, rotate until on target
+      Robot.drivetrain.arcadeDrive(0, output); // If all on its own, rotate until on target
     }
   }
 }
