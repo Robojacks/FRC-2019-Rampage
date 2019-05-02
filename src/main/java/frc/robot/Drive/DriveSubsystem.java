@@ -7,15 +7,13 @@
 
 package frc.robot.Drive;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Constants;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.RobotState;
 
@@ -28,22 +26,15 @@ import frc.robot.RobotState;
  */
 public class DriveSubsystem extends Subsystem {
 
-  private WPI_TalonSRX RRearWheel = new WPI_TalonSRX(RobotMap.RIGHT_REAR_WHEEL_PORT); // right rear wheel
-  private WPI_TalonSRX RFrontWheel = new WPI_TalonSRX(RobotMap.RIGHT_FRONT_WHEEL_PORT); // right front wheel
-  private WPI_TalonSRX LRearWheel = new WPI_TalonSRX(RobotMap.LEFT_REAR_WHEEL_PORT); // left rear wheel
-  private WPI_TalonSRX LFrontWheel = new WPI_TalonSRX(RobotMap.LEFT_FRONT_WHEEL_PORT); // left front wheel
+  private CANSparkMax RRearWheel = new CANSparkMax(RobotMap.RIGHT_REAR_WHEEL_PORT, MotorType.kBrushless); // right rear wheel
+  private CANSparkMax RFrontWheel = new CANSparkMax(RobotMap.RIGHT_FRONT_WHEEL_PORT, MotorType.kBrushless); // right front wheel
+  private CANSparkMax LRearWheel = new CANSparkMax(RobotMap.LEFT_REAR_WHEEL_PORT, MotorType.kBrushless); // left rear wheel
+  private CANSparkMax LFrontWheel = new CANSparkMax(RobotMap.LEFT_FRONT_WHEEL_PORT, MotorType.kBrushless); // left front wheel
 
   private SpeedControllerGroup right = new SpeedControllerGroup(RRearWheel, RFrontWheel); // right speed controller group 
   private SpeedControllerGroup left = new SpeedControllerGroup(LRearWheel, LFrontWheel); // left speed controller group 
 
   private DifferentialDrive roboDrive = new DifferentialDrive(left, right);
-
-  public DriveSubsystem() {
-    Robot.initTalon(RFrontWheel);
-    Robot.initTalon(RRearWheel);
-    Robot.initTalon(LFrontWheel);
-    Robot.initTalon(LRearWheel);
-  }
 
   /**
    * Drives robot in TankDrive mode
@@ -72,71 +63,13 @@ public class DriveSubsystem extends Subsystem {
    */
   public void setMode() {
     if (RobotState.offensiveMode) { // Set motors to offensive mode
-
-      LFrontWheel.setNeutralMode(NeutralMode.Brake);
-      LRearWheel.setNeutralMode(NeutralMode.Brake);
-  
-      RFrontWheel.setNeutralMode(NeutralMode.Brake);
-      RRearWheel.setNeutralMode(NeutralMode.Brake);
-
       RobotState.fullThrottle = false;
 
     } else { // Set motors to defensive mode
-
-      LFrontWheel.setNeutralMode(NeutralMode.Coast);
-      LRearWheel.setNeutralMode(NeutralMode.Coast);
-
-      RFrontWheel.setNeutralMode(NeutralMode.Coast);
-      RRearWheel.setNeutralMode(NeutralMode.Coast);
-  
       RobotState.fullThrottle = true;
 
     }
   }
-
-  /**
-   * Creates a more precise drive control for use with VelocityDrive()
-   * 
-   * @see VelocityDrive
-   */
-  public void VelocityDrive(double leftControl, double rightControl) {
-
-    double leftVelocity = Constants.Left_Kv * Constants.MAX_VELOCITY * leftControl;
-
-    double rightVelocity = Constants.Right_Kv * Constants.MAX_VELOCITY * rightControl;
-
-    // Set follower motors
-    LRearWheel.follow(LFrontWheel);
-    RRearWheel.follow(LFrontWheel);
-
-    // Set left side
-
-    if (leftControl > 0) {
-      LFrontWheel.set(ControlMode.Current, Constants.Left_VIntercept + leftVelocity);
-
-    } else if (leftControl < 0) { // Switch sign of VIntercept
-      LFrontWheel.set(ControlMode.Current, -1.0 * Constants.Left_VIntercept + leftVelocity);
-
-    } else {
-      LFrontWheel.stopMotor();
-
-    }
-
-    // Set right side
-
-    if (rightControl > 0) {
-      RFrontWheel.set(ControlMode.Current, Constants.Right_VIntercept + rightVelocity);
-
-    } else if (rightControl < 0) { // Switch sign of VIntercept
-      RFrontWheel.set(ControlMode.Current, -1.0 * Constants.Right_VIntercept + rightVelocity);
-
-    } else {
-      RFrontWheel.stopMotor();
-
-    }
-
-  }
-
   
   /**
    * Drives robot in ArcadeDrive mode
