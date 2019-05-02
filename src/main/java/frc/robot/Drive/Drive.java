@@ -36,7 +36,6 @@ public class Drive extends Command {
 
   @Override
   protected void execute() {
-
     Robot.drivetrain.setMode();
     Robot.drivetrain.TankDrive(xbox.getRawAxis(5), xbox.getRawAxis(1));
     
